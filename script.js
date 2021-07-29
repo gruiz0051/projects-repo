@@ -4,8 +4,9 @@
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
           keyCode,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize */
-let bird,pipes;
+let bird;
 let pipe = [];
+let = pipes;
 
 function Bird() {
   this.y = height / 2;
