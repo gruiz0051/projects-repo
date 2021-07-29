@@ -3,10 +3,10 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize */
+          keyCode,pipes,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize */
 let bird;
-let pipe = [];
-let = pipes;
+let pipes = [];
+
 
 function Bird() {
   this.y = height / 2;
@@ -46,13 +46,13 @@ function Bird() {
 function setup() {
   createCanvas(640, 480);
   bird = new Bird();
-  pipes.push(new Pipe());
+  //pipes.push(new Pipe());
 }
 
 function draw() {
   background(0);
 
-  for (var i = pipes.length - 1; i >= 0; i--) {
+  /*for (var i = pipes.length - 1; i >= 0; i--) {
     pipes[i].show();
     pipes[i].update();
 
@@ -63,13 +63,13 @@ function draw() {
     if (pipes[i].offscreen()) {
       pipes.splice(i, 1);
     }
-  }
+  }*/ 
 
   bird.update();
   bird.show();
 
   if (frameCount % 75 == 0) {
-    pipes.push(new Pipe());
+    //pipes.push(new Pipe());
   }
 }
 
@@ -79,7 +79,7 @@ function keyPressed() {
     //console.log("SPACE");
   }
 }
-function Pipe() {
+/* function Pipe() {
   this.spacing = 175;
   this.top = random(height / 6, (3 / 4) * height);
   this.bottom = height - (this.top + this.spacing);
@@ -120,4 +120,4 @@ function Pipe() {
       return false;
     }
   };
-}
+} */
