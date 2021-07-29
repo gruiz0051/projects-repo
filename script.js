@@ -43,7 +43,17 @@ class Ball {
     
     // When at bottom edge, reverse the direction.
     if (this.y >= height - this.size/2) {
+      //this.velocity *= -1;
+      // Giving the bounce up a little less energy.
+      // Multiplying by a little less every bounce.
+      // this.velocity *= -0.97;
+      // Subtracting 1 every bounce.
       this.velocity *= -1;
+      if (this.velocity < -1) {
+        this.velocity +=1;
+      } else {
+        this.velocity = 0;
+      }
     } else if (this.velocity <= 10) {
         // Add constant Acceleration to velocity every moveSelf();
         this.velocity += this.acceleration;
