@@ -12,7 +12,7 @@ function setup() {
   createCanvas(400, 400);
   colorMode(HSB, 360, 100, 100);
   backgroundColor = 95;
-  ball = new ball();
+  ball = new Ball();
   
 }
 
@@ -25,11 +25,22 @@ class Ball{
   constructor(){
     this.x = 100;
     this.y = 10;
-    this.velocity =1;
+    this.velocity = 1;
     this.accerlartion=0.5;
+    this.size = 20;
   }
  moveSelf(){
    this.y += this.velocity;
-   this.velocity += this.accerlartion;
+   //this.velocity += this.accerlartion;
+   if(this.y > height - this.size/2){
+     this.velocity *= -1;
+   }else{
+     this.velocity += this.accerlartion;
+   }
  }
-  showSelf
+  showSelf(){
+    fill(0);
+    ellipse(this.x,this.y,20,20)
+    
+  }
+}
