@@ -3,42 +3,31 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,pipes,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
+          keyCode,pipes,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
-let imgPosition,img;
+let imgPosition;
+let cat;
 let turPosX = 300;
 let turPosY = 300;
 
 function setup() {
   createCanvas(640, 480);
+  keyPressed();
 }
 
 function draw() {
   background(0)
- image(img,120,130);
+  imageMode(Center);
+ image(cat,width/2,height/2);
 }
 function preload() {
-  img = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
+  cat = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
 }
 
-/* class Dog{
-	constructor(xSpd, ySpd){
-		this.x = turPosX;
-		this.y = turPosY;
-		this.xSpd = 12*xSpd;
-		this.ySpd = 12*ySpd;
-	}
-	
-	showSelf(){
-		stroke(230, 255, 0);
-		fill(230, 255, 0, 135);
-		ellipse(this.x, this.y, 10);
-	}
-} */
 function keyPressed(){
-  if keyCode === RIGHT_ARROW(){
-    img.left();
+  if (keyCode === RIGHT_ARROW){
+    cat.move(10);
   }else if (keyCode === LEFT_ARROW){
-    
+    cat.move(-10);
   }
 }
