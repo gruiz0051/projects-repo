@@ -8,18 +8,20 @@
 let imgPosition,img;
 let turPosX = 300;
 let turPosY = 300;
+
 function setup() {
   createCanvas(640, 480);
 }
 
 function draw() {
   background(0)
- image(img,145,155,150,100);
+ image(img,120,130);
 }
 function preload() {
   img = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
 }
-class Dog{
+
+/* class Dog{
 	constructor(xSpd, ySpd){
 		this.x = turPosX;
 		this.y = turPosY;
@@ -32,4 +34,11 @@ class Dog{
 		fill(230, 255, 0, 135);
 		ellipse(this.x, this.y, 10);
 	}
+} */
+function keyPressed(){
+  if keyCode === RIGHT_ARROW(){
+    img.left();
+  }else if (keyCode === LEFT_ARROW){
+    
+  }
 }
