@@ -12,8 +12,9 @@ let catY= 300;
 let dog;
 let dogXPos=100;
 let dogYPos = 100;
-let dogX = 100;
-let dogY = 100;
+let dogX = Math.floor(Math.random() * 300) + 50;
+let dogY = 50;
+let diameter = 500;
 var xDogChange = 5;
 var yDOGChange = 5;
 
@@ -26,7 +27,27 @@ function draw() {
   background(0)
   imageMode(CENTER);
  image(cat,catX,catY,100,100);
-  image(dog,dogXPos,dogY)P
+  image(dog,dogXPos,dogYPos, diameter,diameter);
+  
+  /* dogX += xDogChange;
+	dogY += yDogChange;
+	if (dogX < diameter/2 || 
+      dogX > windowWidth - 0.5*diameter) {
+		xDOGChange *= -1;
+  }
+	if (dogY < diameter/2 || 
+      dogY > windowHeight - diameter) {
+    yBallChange *= -1;
+	}
+  
+  // Detect collision with paddle
+  if ((xBall > xPaddle &&
+      xBall < xPaddle + paddleWidth) &&
+      (yBall + (diameter/2) >= yPaddle)) {
+    xBallChange *= -1;
+    yBallChange *= -1;
+    score++;
+  }*/
 
 }
 function preload() {
