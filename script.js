@@ -184,11 +184,11 @@ function updatePlayer() {
 
   fill(catColor);
   //triangle(-size+1, -size+1, size+1, 0, -size+1, size+1);
-  pop();
-  fill(255);
-  text(Health,cat.x-10,cat.y+25)
+  //pop();
+  //fill(255);
+  //text(Health,cat.x-10,cat.y+25)
  
-  fill(255);
-  text(Score,25,25);
+  //fill(255);
+  //text(Score,25,25);
 
 }
