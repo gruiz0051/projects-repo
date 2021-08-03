@@ -3,137 +3,49 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,size,catColor,force, heading,boostColor,Score,Health,catVel,cat,p5,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
+          keyCode,translate,rotate,triangle,dist,distance,size,radians,catColor,force, heading,boostColor,Score,Health,catVel,cat,p5,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
-let imgPosition;
-let turPosX = 300;
-let turPosY = 300;
-let score=0;
-let started = false;
-let cat;
-let catX;
-let catY;
-let catXPos=100;
-let catYPos=115;
 let dog;
-//let dogXPos=100;
-//let dogYPos = 100;
-let dogX = Math.floor(Math.random() * 900) + 80;
-let dogY = 50;
-let diameter = 200;
-var xDogChange = 2;
-var yDogChange = 2;
-
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  keyPressed();
-}
-
-function draw() {
-  //getMouseVector();
-  //drawReticle();
-  
-  background(0)
-  imageMode(CENTER);
- image(cat,catX,catY,catXPos,catYPos);
-  
-  noStroke();
- image(dog,dogX,dogY,diameter,diameter);
-  
-  fill(0, 255, 255);
-  textSize(24);
-	text("Score: " + score, 10, 25);
-  
-  if (!started) {
-    catX = windowWidth / 2;
-    catY = windowHeight - 300;
-    started = true;
-  }
-  
-  dogX += xDogChange;
-	dogY += yDogChange;
-	if (dogX < diameter/5 || 
-      dogX > windowWidth - 0.5*diameter) {
-		xDogChange *= -1;
-  }
-	if (dogY < diameter/5 || 
-      dogY > windowHeight - diameter) {
-    yDogChange *= -1;
-	}
-  
-  // Detect collision with paddle
-  if ((dogX > catX &&
-      dogX < catX + catXPos) &&
-    (dogY + (diameter/2) >= catY)){
-    xDogChange *= -1;
-    yDogChange *= -1;
-    score++;
-  }
-
-}
-function preload() {
-  cat = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
-  dog = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fdog%20head%20(1).png?v=1627949104971")
-}                
-function keyPressed(){
-  if (keyCode === UP_ARROW){
-    catY = catY - 50;
-  }else if (keyCode === LEFT_ARROW){
-    catX = catX - 50;
-  }else if (keyCode === DOWN_ARROW){
-    catY = catY+50;
-  }else if (keyCode === RIGHT_ARROW){
-    catX = catX+50;
-  }
-
-  }
-  
-
-/*function getMouseVector(){
-	let mouseXalt = mouseX - turPosX;
-	let mouseYalt = mouseY - turPosY;
-	let mouseDir = createVector(mouseXalt, mouseYalt);
-	mouseDir.normalize();
-	return mouseDir;
-}
-function drawReticle(){
-	noFill();
-	strokeWeight(1.5);
-	stroke(0, 100, 125, 125);
-	ellipse(mouseX, mouseY, 20);
-	stroke(80, 160, 200, 125);
-	line(mouseX-14, mouseY-14, mouseX+14, mouseY+14);
-	line(mouseX+14, mouseY-14, mouseX-14, mouseY+14);
-	stroke(80, 160, 200, 125);
-	line(turPosX, turPosY, mouseX, mouseY);
-}
-*/
+let dogVel;
+let dogSize;
+let lasers = [];
+let laserVel = [];
+let cat;
+let size;
+let heading;
+let catVel;
+let force;
+let boostColor;
+let touch;
+let catColor;
+let Score;
+let Health;
 
 /*function preload() {
  laserSound = loadSound('laser.ogg');
   deathSound= loadSound('death.ogg');
-}
+}*/
  
 
 
 function setup() {
   createCanvas(400, 400);
-  p=createVector(width/2,height/2)
-  pVel=createVector(0,0);
+  cat=createVector(width/2,height/2)
+  catVel=createVector(0,0);
   force=createVector(0,0);
   size = 10;
   heading = 0;
   boostColor = color(0, 255, 0);
-  playerColor = color(255);
+  catColor = color(255);
   Score  =  0;
   Health = 200;
-  bb = [];
-  bbVel = [];
-  bbSize = 25;
+  dog = [];
+  dogVel = [];
+  dogSize = 25;
   
   for(var i = 0;i < 5;i++){
-    bb.push(createVector( random ( 0,width ) ,random ( 0,height ) ) );
-  bbVel.push( p5.Vector.random2D().mult(random(0.25,2.25)));
+    dog.push(createVector( random ( 0,width ) ,random ( 0,height ) ) );
+  dogVel.push( p5.Vector.random2D().mult(random(0.25,2.25)));
 }
 }
 function draw() {
@@ -146,5 +58,134 @@ function draw() {
 }
 
 
-*/
+
+function updateBubbles(){
+  touch = false;
+for(var i = 0;i < dog.length;i++){
+ push();
+  
+  //bubble collisions 
+  if(dist(dog[i].x,dog[i].y,cat.x,cat.y) <dogSize/2 ){
+  touch = true;
+    console.log(touch);
+  }
+  //update bb locations
+  dog[i].add(dogVel[i]);
  
+  //contain bb
+  //contain player
+  if(dog[i].x > width+dogSize/2){
+    dog[i].x = 0
+     }
+  if(dog[i].x < -dogSize/2){
+    dog[i].x = 400
+     }
+ if(dog[i].y > height+dogSize/2){
+    dog[i].y = 0
+     }
+ if(dog[i].y < -dogSize/2){
+   dog[i].y = 400 
+     }
+  
+  fill(132,112,255,45)
+  stroke(255);
+  ellipse(dog[i].x,dog[i].y,dogSize);
+  pop();
+}
+  if(touch == true){
+  catColor= color(255,0,0);
+    Health --;
+  }else{
+  catColor = color(255);
+  }
+
+}
+function updateLasers() {
+  for (var i = 0; i < lasers.length; i++) {
+
+    //check bubble collisions
+    for (var z = 0; z < dog.length; z++) {
+      if (dist(lasers[i].x, lasers[i].y, dog[z].x, dog[z].y) < dogSize / 2) {
+        dog[z] = createVector(random(0, width), random(0, height));
+        dogVel[z] = p5.Vector.random2D().mult(random(0.25, 2.25));
+        Score ++;
+      }
+    }
+    lasers[i].add(laserVel[i]);
+
+    push();
+    stroke(132, 112, 255);
+    //point(lasers[i].x,lasers[i].y);
+
+    line(lasers[i].x, lasers[i].y, lasers[i].x + laserVel[i].x * 4, lasers[i].y + laserVel[i].y * 4)
+
+    pop();
+  }
+}
+
+function keyPressed() {                  
+  //console.log (keyCode); 
+  if (keyCode == 32) {  
+    //laserSound.play();
+    lasers.push(createVector(cat.x, cat.y));
+    laserVel.push(p5.Vector.fromAngle(radians(heading)).mult(7));
+
+
+  }
+}
+function updatePlayer() {
+  boostColor = color(0)
+  //move and rotate player 
+    
+    if( keyIsDown(LEFT_ARROW)){
+    heading -= 6;
+    }
+    if( keyIsDown(RIGHT_ARROW)){
+    heading+= 6;
+    }
+    if(keyIsDown(UP_ARROW)){
+    force=p5.Vector.fromAngle(radians(heading));
+    catVel.add(force.mult(0.2));
+      boostColor = color(0, 255, 0);
+    }
+  
+  //contain player
+  if(p.x > 400){
+    p.x = 0
+     }
+  if(p.x < 0){
+    p.x = 400
+     }
+ if(p.y > 400){
+     p.y = 0
+     }
+ if(p.y < 0){
+   p.y = 400 
+     }
+
+
+  
+  //update player location
+	pVel.mult(0.978);
+  p.add(pVel);
+  //draw the player
+  push();
+  translate(p.x , p.y);
+  rotate(radians(heading));
+  //flame stuff
+  
+  fill(boostColor)
+  triangle(-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
+  //health
+  
+
+  fill(playerColor);
+  triangle(-size+1, -size+1, size+1, 0, -size+1, size+1);
+  pop();
+  fill(255);
+  text(Health,p.x-10,p.y+25)
+ 
+  fill(255);
+  text(Score,25,25);
+
+}
