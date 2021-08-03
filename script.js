@@ -3,9 +3,9 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
+          keyCode,push,pop,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
-let imgPosition;
+/*let imgPosition;
 let turPosX = 300;
 let turPosY = 300;
 let score=0;
@@ -85,6 +85,15 @@ function keyPressed(){
   }else if (keyCode === RIGHT_ARROW){
     catX = catX+50;
   }
+  if (keyCode == 32) {  
+    laserSound.play();
+    lasers.push(createVector(p.x, p.y));
+    laserVel.push(p5.Vector.fromAngle(radians(heading)).mult(7));
+
+
+  }
+  
+  
 }
 /*function getMouseVector(){
 	let mouseXalt = mouseX - turPosX;
@@ -106,40 +115,41 @@ function drawReticle(){
 }
 */
 
-lasers = [];
-laserVel = [];
+/*function preload() {
+ laserSound = loadSound('laser.ogg');
+  deathSound= loadSound('death.ogg');
+}
+ 
 
 
-function updateLasers() {
-  for (var i = 0; i < lasers.length; i++) {
+function setup() {
+  createCanvas(400, 400);
+  p=createVector(width/2,height/2)
+  pVel=createVector(0,0);
+  force=createVector(0,0);
+  size = 10;
+  heading = 0;
+  boostColor = color(0, 255, 0);
+  playerColor = color(255);
+  Score  =  0;
+  Health = 200;
+  bb = [];
+  bbVel = [];
+  bbSize = 25;
+  
+  for(var i = 0;i < 5;i++){
+    bb.push(createVector( random ( 0,width ) ,random ( 0,height ) ) );
+  bbVel.push( p5.Vector.random2D().mult(random(0.25,2.25)));
+}
+}
+function draw() {
+  background(0);
 
-    //check bubble collisions
-    for (var z = 0; z < bb.length; z++) {
-      if (dist(lasers[i].x, lasers[i].y, bb[z].x, bb[z].y) < bbSize / 2) {
-        bb[z] = createVector(random(0, width), random(0, height));
-        bbVel[z] = p5.Vector.random2D().mult(random(0.25, 2.25));
-        Score ++;
-      }
-    }
-    lasers[i].add(laserVel[i]);
+  updatePlayer();
+  updateBubbles();
+  updateLasers();
 
-    push();
-    stroke(132, 112, 255);
-    //point(lasers[i].x,lasers[i].y);
-
-    line(lasers[i].x, lasers[i].y, lasers[i].x + laserVel[i].x * 4, lasers[i].y + laserVel[i].y * 4)
-
-    pop();
-  }
 }
 
-function keyPressed() {                  
-  //console.log (keyCode); 
-  if (keyCode == 32) {  
-    laserSound.play();
-    lasers.push(createVector(p.x, p.y));
-    laserVel.push(p5.Vector.fromAngle(radians(heading)).mult(7));
 
-
-  }
-}
+*/
