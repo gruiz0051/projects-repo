@@ -3,7 +3,7 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,translate,img,rotate,triangle,dist,distance,size,radians,catColor,force, heading,boostColor,Score,Health,catVel,cat,p5,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
+          keyCode,translate,rotate,triangle,dist,distance,size,radians,catColor,force, heading,boostColor,Score,Health,catVel,cat,p5,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
 let dog;
 let dogVel;
@@ -20,10 +20,11 @@ let touch;
 let catColor;
 let Score;
 let Health;
+let catImg;
 
 
 function preload() {
- img = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
+ catImg = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
 }
  
 
@@ -56,7 +57,7 @@ function draw() {
   updatePlayer();
   updateBubbles();
   updateLasers();
-  image(img,width/2,height/2);
+  image(catImg,width/2,height/2);
 
 }
 
@@ -173,22 +174,22 @@ function updatePlayer() {
   cat.add(catVel);
   //draw the player
   push();
-  translate(cat.x , cat.y);
+  translate(catImg.x , catImg.y);
   rotate(radians(heading));
   //flame stuff
   
   fill(boostColor)
-  //triangle(-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
+  triangle(-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
   //health
   
 
   fill(catColor);
-  //triangle(-size+1, -size+1, size+1, 0, -size+1, size+1);
-  //pop();
-  //fill(255);
-  //text(Health,cat.x-10,cat.y+25)
+  triangle(-size+1, -size+1, size+1, 0, -size+1, size+1);
+  pop();
+  fill(255);
+  text(Health,cat.x-10,cat.y+25)
  
-  //fill(255);
-  //text(Score,25,25);
+  fill(255);
+  text(Score,25,25);
 
 }
