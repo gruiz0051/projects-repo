@@ -3,9 +3,11 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,pipes,CENTER,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
+          keyCode,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
 let imgPosition;
+let turPosX = 300;
+let turPosY = 300;
 let score=0;
 let started = false;
 let cat;
@@ -28,6 +30,9 @@ function setup() {
 }
 
 function draw() {
+  //getMouseVector();
+  //drawReticle();
+  
   background(0)
   imageMode(CENTER);
  image(cat,catX,catY,catXPos,catYPos);
@@ -41,7 +46,7 @@ function draw() {
   
   if (!started) {
     catX = windowWidth / 2;
-    catY = windowHeight - 100;
+    catY = windowHeight - 300;
     started = true;
   }
   
@@ -81,4 +86,23 @@ function keyPressed(){
     catX = catX+50;
   }
 }
+/*function getMouseVector(){
+	let mouseXalt = mouseX - turPosX;
+	let mouseYalt = mouseY - turPosY;
+	let mouseDir = createVector(mouseXalt, mouseYalt);
+	mouseDir.normalize();
+	return mouseDir;
+}
+function drawReticle(){
+	noFill();
+	strokeWeight(1.5);
+	stroke(0, 100, 125, 125);
+	ellipse(mouseX, mouseY, 20);
+	stroke(80, 160, 200, 125);
+	line(mouseX-14, mouseY-14, mouseX+14, mouseY+14);
+	line(mouseX+14, mouseY-14, mouseX-14, mouseY+14);
+	stroke(80, 160, 200, 125);
+	line(turPosX, turPosY, mouseX, mouseY);
+}
+*/
 
