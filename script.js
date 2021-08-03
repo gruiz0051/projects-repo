@@ -6,9 +6,13 @@
           keyCode,pipes,CENTER,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
 let imgPosition;
+let score=0;
+let started = false;
 let cat;
-let catX=300;
-let catY= 300;
+let catX;
+let catY;
+let catXPos=100;
+let catYPos=25;
 let dog;
 let dogXPos=100;
 let dogYPos = 100;
@@ -26,8 +30,18 @@ function setup() {
 function draw() {
   background(0)
   imageMode(CENTER);
- image(cat,catX,catY,100,100);
+ image(cat,catXPos,catYPos);
   image(dog,dogXPos,dogYPos, diameter,diameter);
+  
+  fill(0, 255, 255);
+  textSize(24);
+	text("Score: " + score, 10, 25);
+  
+  if (!started) {
+    catX = windowWidth / 2;
+    catY = windowHeight - 100;
+    started = true;
+  }
   
   dogX += xDogChange;
 	dogY += yDogChange;
@@ -40,14 +54,14 @@ function draw() {
     yDogChange *= -1;
 	}
   
-  /* // Detect collision with paddle
-  if ((dogx > xPaddle &&
-      dogX < xPaddle + paddleWidth) &&
-      (dogY + (diameter/2) >= yPaddle)) {
-    xBallChange *= -1;
-    yBallChange *= -1;
+  // Detect collision with paddle
+  if ((dogX > catX &&
+      dogX < catX + catXPos) &&
+    (dogY + (diameter/2) >= catY)){
+    xDogChange *= -1;
+    yDogChange *= -1;
     score++;
-  }*/
+  }
 
 }
 function preload() {
