@@ -9,6 +9,9 @@ let imgPosition;
 let cat;
 let catX=300;
 let catY= 300;
+let dog;
+let dogX = 100;
+let dogY = 100;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -19,11 +22,12 @@ function draw() {
   background(0)
   imageMode(CENTER);
  image(cat,catX,catY,100,100);
+  image(dog,dogX,dogY)
 }
 function preload() {
   cat = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
-}
-
+  dog = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fdog%20head%20(1).png?v=1627949104971")
+}                
 function keyPressed(){
   if (keyCode === UP_ARROW){
     catY = catY - 5;
@@ -31,17 +35,8 @@ function keyPressed(){
     catX = catX - 5;
   }else if (keyCode === DOWN_ARROW){
     catY = catY+5;
-  }else if (keyIsDown === RIGHT_ARROW){
+  }else if (keyCode === RIGHT_ARROW){
     catX = catX+5;
   }
 }
-/*
-if (keyIsDown(UP_ARROW)) {
-    frogY -= frogSpeed;
-  } else if (keyIsDown(LEFT_ARROW)) {
-    frogX -= frogSpeed;
-  } else if (keyIsDown(RIGHT_ARROW)) {
-    frogX += frogSpeed;
-  } else if (keyIsDown(DOWN_ARROW)) {
-    frogY += frogSpeed;
-  } */
+
