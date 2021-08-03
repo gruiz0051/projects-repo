@@ -12,15 +12,15 @@ let cat;
 let catX;
 let catY;
 let catXPos=100;
-let catYPos=25;
+let catYPos=115;
 let dog;
-let dogXPos=100;
-let dogYPos = 100;
-let dogX = Math.floor(Math.random() * 300) + 50;
+//let dogXPos=100;
+//let dogYPos = 100;
+let dogX = Math.floor(Math.random() * 900) + 80;
 let dogY = 50;
-let diameter = 500;
-var xDogChange = 5;
-var yDogChange = 5;
+let diameter = 200;
+var xDogChange = 2;
+var yDogChange = 2;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -30,8 +30,10 @@ function setup() {
 function draw() {
   background(0)
   imageMode(CENTER);
- image(cat,catXPos,catYPos);
-  image(dog,dogXPos,dogYPos, diameter,diameter);
+ image(cat,catX,catY,catXPos,catYPos);
+  
+  noStroke();
+ image(dog,dogX,dogY,diameter,diameter);
   
   fill(0, 255, 255);
   textSize(24);
@@ -45,11 +47,11 @@ function draw() {
   
   dogX += xDogChange;
 	dogY += yDogChange;
-	if (dogX < diameter/2 || 
+	if (dogX < diameter/5 || 
       dogX > windowWidth - 0.5*diameter) {
 		xDogChange *= -1;
   }
-	if (dogY < diameter/2 || 
+	if (dogY < diameter/5 || 
       dogY > windowHeight - diameter) {
     yDogChange *= -1;
 	}
@@ -70,13 +72,13 @@ function preload() {
 }                
 function keyPressed(){
   if (keyCode === UP_ARROW){
-    catY = catY - 5;
+    catY = catY - 50;
   }else if (keyCode === LEFT_ARROW){
-    catX = catX - 5;
+    catX = catX - 50;
   }else if (keyCode === DOWN_ARROW){
-    catY = catY+5;
+    catY = catY+50;
   }else if (keyCode === RIGHT_ARROW){
-    catX = catX+5;
+    catX = catX+50;
   }
 }
 
