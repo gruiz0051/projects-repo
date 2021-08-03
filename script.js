@@ -3,7 +3,7 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,translate,rotate,triangle,dist,distance,size,radians,catColor,force, heading,boostColor,Score,Health,catVel,cat,p5,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
+          keyCode,translate,img,rotate,triangle,dist,distance,size,radians,catColor,force, heading,boostColor,Score,Health,catVel,cat,p5,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
 let dog;
 let dogVel;
@@ -21,10 +21,10 @@ let catColor;
 let Score;
 let Health;
 
-/*function preload() {
- laserSound = loadSound('laser.ogg');
-  deathSound= loadSound('death.ogg');
-}*/
+
+function preload() {
+ img = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
+}
  
 
 
@@ -43,6 +43,8 @@ function setup() {
   dogVel = [];
   dogSize = 25;
   
+  
+  
   for(var i = 0;i < 5;i++){
     dog.push(createVector( random ( 0,width ) ,random ( 0,height ) ) );
   dogVel.push( p5.Vector.random2D().mult(random(0.25,2.25)));
@@ -54,6 +56,7 @@ function draw() {
   updatePlayer();
   updateBubbles();
   updateLasers();
+  image(img,width/2,height/2);
 
 }
 
@@ -150,40 +153,40 @@ function updatePlayer() {
     }
   
   //contain player
-  if(p.x > 400){
-    p.x = 0
+  if(cat.x > 400){
+    cat.x = 0
      }
-  if(p.x < 0){
-    p.x = 400
+  if(cat.x < 0){
+    cat.x = 400
      }
- if(p.y > 400){
-     p.y = 0
+ if(cat.y > 400){
+     cat.y = 0
      }
- if(p.y < 0){
-   p.y = 400 
+ if(cat.y < 0){
+   cat.y = 400 
      }
 
 
   
   //update player location
-	pVel.mult(0.978);
-  p.add(pVel);
+	catVel.mult(0.978);
+  cat.add(catVel);
   //draw the player
   push();
-  translate(p.x , p.y);
+  translate(cat.x , cat.y);
   rotate(radians(heading));
   //flame stuff
   
   fill(boostColor)
-  triangle(-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
+  //triangle(-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
   //health
   
 
-  fill(playerColor);
-  triangle(-size+1, -size+1, size+1, 0, -size+1, size+1);
+  fill(catColor);
+  //triangle(-size+1, -size+1, size+1, 0, -size+1, size+1);
   pop();
   fill(255);
-  text(Health,p.x-10,p.y+25)
+  text(Health,cat.x-10,cat.y+25)
  
   fill(255);
   text(Score,25,25);
