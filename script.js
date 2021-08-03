@@ -10,8 +10,12 @@ let cat;
 let catX=300;
 let catY= 300;
 let dog;
+let dogXPos=100;
+let dogYPos = 100;
 let dogX = 100;
 let dogY = 100;
+var xDogChange = 5;
+var yDOGChange = 5;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -22,7 +26,8 @@ function draw() {
   background(0)
   imageMode(CENTER);
  image(cat,catX,catY,100,100);
-  image(dog,dogX,dogY)
+  image(dog,dogXPos,dogY)P
+
 }
 function preload() {
   cat = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
