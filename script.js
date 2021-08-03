@@ -3,9 +3,9 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,push,pop,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
+          keyCode,size,catColor,force, heading,boostColor,Score,Health,catVel,cat,p5,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
-/*let imgPosition;
+let imgPosition;
 let turPosX = 300;
 let turPosY = 300;
 let score=0;
@@ -85,16 +85,10 @@ function keyPressed(){
   }else if (keyCode === RIGHT_ARROW){
     catX = catX+50;
   }
-  if (keyCode == 32) {  
-    laserSound.play();
-    lasers.push(createVector(p.x, p.y));
-    laserVel.push(p5.Vector.fromAngle(radians(heading)).mult(7));
-
 
   }
   
-  
-}
+
 /*function getMouseVector(){
 	let mouseXalt = mouseX - turPosX;
 	let mouseYalt = mouseY - turPosY;
@@ -153,3 +147,4 @@ function draw() {
 
 
 */
+ 
