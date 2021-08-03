@@ -16,7 +16,7 @@ let dogX = Math.floor(Math.random() * 300) + 50;
 let dogY = 50;
 let diameter = 500;
 var xDogChange = 5;
-var yDOGChange = 5;
+var yDogChange = 5;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -29,21 +29,21 @@ function draw() {
  image(cat,catX,catY,100,100);
   image(dog,dogXPos,dogYPos, diameter,diameter);
   
-  /* dogX += xDogChange;
+  dogX += xDogChange;
 	dogY += yDogChange;
 	if (dogX < diameter/2 || 
       dogX > windowWidth - 0.5*diameter) {
-		xDOGChange *= -1;
+		xDogChange *= -1;
   }
 	if (dogY < diameter/2 || 
       dogY > windowHeight - diameter) {
-    yBallChange *= -1;
+    yDogChange *= -1;
 	}
   
-  // Detect collision with paddle
-  if ((xBall > xPaddle &&
-      xBall < xPaddle + paddleWidth) &&
-      (yBall + (diameter/2) >= yPaddle)) {
+  /* // Detect collision with paddle
+  if ((dogx > xPaddle &&
+      dogX < xPaddle + paddleWidth) &&
+      (dogY + (diameter/2) >= yPaddle)) {
     xBallChange *= -1;
     yBallChange *= -1;
     score++;
