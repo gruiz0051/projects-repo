@@ -181,14 +181,14 @@ function updatePlayer() {
   //flame stuff
   
   fill(boostColor)
-  //image(catImg,width/2,height/2);
-  triangle(-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
+  image(catImg,-size+8,size*.7,-size*10,size/1,size*-.7,-size*50);
+  //triangle(catImg,-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
   //health
   
 
   fill(catColor);
-  //image(catImg,width/2,height/2);
-  triangle(-size+1, -size+1, size+1, 0, -size+1, size+1);
+  image(catImg,-size+8,size*.7,-size*10,size/1,size*-.7,-size*1);
+  //triangle(catImg,-size+1, -size+1, size+1, 0, -size+1, size+1);
   pop();
   fill(255);
   text(Health,cat.x-10,cat.y+25)
