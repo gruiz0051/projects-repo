@@ -22,11 +22,10 @@ let dogImg;
 
 function preload() {
   catImg = loadImage(
-    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fcat%20head%20(1).png?v=1628115693478"
+    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-cat.png?v=1628119192338"
   );
   dogImg = loadImage(
-    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2FUntitled.png?v=1628061819866"
-  );
+    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-chihuahua.png?v=1628119285299")
 }
 
 function setup() {
@@ -39,7 +38,7 @@ function setup() {
   Score = 0;
   dog = [];
   dogVel = [];
-  dogSize = 500;
+  dogSize = 30;
 
   for (var i = 0; i < 5; i++) {
     dog.push(createVector(random(0, width), random(0, height)));
@@ -60,7 +59,7 @@ function updateBubbles() {
     push();
 
     //dog to cat collisions
-    if (dist(dog[i].x, dog[i].y, cat.x, cat.y) < dogSize / 3) {
+    if (dist(dog[i].x, dog[i].y, cat.x, cat.y) < dogSize / 2) {
       touch = true;
       console.log(touch);
     }
@@ -88,7 +87,7 @@ function updateLasers() {
   for (var i = 0; i < lasers.length; i++) {
     //checks collisions
     for (var z = 0; z < dog.length; z++) {
-      if (dist(lasers[i].x, lasers[i].y, dog[z].x, dog[z].y) < dogSize / 30) {
+      if (dist(lasers[i].x, lasers[i].y, dog[z].x, dog[z].y) < dogSize / 2) {
         dog[z] = createVector(random(0, width), random(0, height));
         dogVel[z] = p5.Vector.random2D().mult(random(0.25, 2.25));
         Score++;
@@ -152,10 +151,10 @@ function updatePlayer() {
   rotate(radians(heading));
   // draws the cat
   imageMode(CENTER);
-  image(catImg, size / 2, size / 2);
+  image(catImg, size / 10, size / 10);
   //draws the cat again
   imageMode(CENTER);
-  image(catImg, size / 2, size / 2);
+  image(catImg, size / 10, size / 10);
   //makes the score go in the corner
   pop();
   fill(255);
