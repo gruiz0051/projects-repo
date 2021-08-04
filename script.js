@@ -26,9 +26,8 @@ let dogImg;
 
 function preload() {
  catImg = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
- dogImg = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fdog%20head%20(1).png?v=1627949104971")
+ dogImg = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fdog.png?v=1628061099317")
 }
- 
 
 
 function setup() {
@@ -44,7 +43,7 @@ function setup() {
   Health = 200;
   dog = [];
   dogVel = [];
-  dogSize = 100;
+  dogSize = 25;
   
   
   
@@ -90,7 +89,7 @@ for(var i = 0;i < dog.length;i++){
     dog[i].y = 0
      }
  if(dog[i].y < -dogSize/2){
-   dog[i].y = 400 
+   dog[i].y = 400
      }
   
   fill(132,112,255,45)
