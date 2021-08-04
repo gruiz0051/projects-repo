@@ -21,10 +21,12 @@ let catColor;
 let Score;
 let Health;
 let catImg;
+let dogImg;
 
 
 function preload() {
  catImg = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
+ dogImg = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fdog%20head%20(1).png?v=1627949104971")
 }
  
 
@@ -42,7 +44,7 @@ function setup() {
   Health = 200;
   dog = [];
   dogVel = [];
-  dogSize = 25;
+  dogSize = 100;
   
   
   
@@ -92,8 +94,8 @@ for(var i = 0;i < dog.length;i++){
      }
   
   fill(132,112,255,45)
-  stroke(255);
-  ellipse(dog[i].x,dog[i].y,dogSize);
+  noStroke();
+  image(dogImg,dog[i].x,dog[i].y,dogSize);
   pop();
 }
   if(touch == true){
@@ -175,7 +177,7 @@ function updatePlayer() {
   //draw the player
   push();
   image(catImg,width/2,height/2);
-  translate(cat.x , cat.y);
+  translate( cat.x , cat.y);
   rotate(radians(heading));
   //flame stuff
   
