@@ -3,7 +3,7 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,translate,rotate,triangle,dist,distance,size,radians,catColor,force, heading,boostColor,Score,Health,catVel,cat,p5,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,noFill,pipes,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
+          keyCode,translate,rotate,p5,dist,distance,size,radians,catColor,force, heading,boostColor,Score,catVel,cat,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
 let dog;
 let dogVel;
@@ -90,7 +90,7 @@ function updateLasers() {
     for (var z = 0; z < dog.length; z++) {
       if (dist(lasers[i].x, lasers[i].y, dog[z].x, dog[z].y) < dogSize / 4) {
         dog[z] = createVector(random(0, width), random(0, height));
-        dogVel[z] = p5.Vector.random2D().mult(random(0.50, 4.50));
+        dogVel[z] = p5.Vector.random2D().mult(random(0.25, 2.25));
         Score++;
       }
     }
