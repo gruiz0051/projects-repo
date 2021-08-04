@@ -35,7 +35,7 @@ function setup() {
   cat=createVector(width/2,height/2)
   catVel=createVector(0,0);
   force=createVector(0,0);
-  size = 5;
+  size = 20;
   heading = 0;
   boostColor = color(0, 255, 0);
   catColor = color(255);
@@ -181,13 +181,13 @@ function updatePlayer() {
   //flame stuff
   
   fill(boostColor)
-  image(catImg,-size+2,size*0.7,-size*3.5,size/7,size*-.7,-size*.7);
+  image(catImg,size+2,size*0.7,-size*3.5,size/7,size*.7,size*.7);
   //triangle(catImg,-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
   //health
   
 
   fill(catColor);
-  image(catImg,-size+2,size*0.7,-size*3.5,size/7,size*-.7,-size*7);
+  image(catImg,size+2,size*0.7,-size*3.5,size/7,size*.7,size*7);
   //triangle(catImg,-size+1, -size+1, size+1, 0, -size+1, size+1);
   pop();
   fill(255);
