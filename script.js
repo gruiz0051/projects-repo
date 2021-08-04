@@ -60,7 +60,7 @@ function updateBubbles() {
     push();
 
     //dog to cat collisions
-    if (dist(dog[i].x, dog[i].y, cat.x, cat.y) < dogSize / 2) {
+    if (dist(dog[i].x, dog[i].y, cat.x, cat.y) < dogSize / 3) {
       touch = true;
       console.log(touch);
     }
@@ -88,7 +88,7 @@ function updateLasers() {
   for (var i = 0; i < lasers.length; i++) {
     //checks collisions
     for (var z = 0; z < dog.length; z++) {
-      if (dist(lasers[i].x, lasers[i].y, dog[z].x, dog[z].y) < dogSize / 4) {
+      if (dist(lasers[i].x, lasers[i].y, dog[z].x, dog[z].y) < dogSize / 30) {
         dog[z] = createVector(random(0, width), random(0, height));
         dogVel[z] = p5.Vector.random2D().mult(random(0.25, 2.25));
         Score++;
