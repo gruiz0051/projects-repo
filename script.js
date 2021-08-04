@@ -15,11 +15,8 @@ let size;
 let heading;
 let catVel;
 let force;
-let boostColor;
 let touch;
-let catColor;
 let Score;
-let Health;
 let catImg;
 let dogImg;
 
@@ -35,12 +32,9 @@ function setup() {
   cat=createVector(width/2,height/2)
   catVel=createVector(0,0);
   force=createVector(0,0);
-  size = 25;
+  size = 10;
   heading = 0;
-  boostColor = color(0, 255, 0);
-  catColor = color(255);
   Score  =  0;
-  Health = 200;
   dog = [];
   dogVel = [];
   dogSize = 500;
@@ -92,17 +86,11 @@ for(var i = 0;i < dog.length;i++){
    dog[i].y = 400
      }
   
-  fill(132,112,255,45)
-  stroke(225);
+  //fill();
+  //stroke(225);
   image(dogImg,dog[i].x,dog[i].y,dogSize);
   pop();
 }
-  if(touch == true){
-  catColor= color(255,0,0);
-    Health --;
-  }else{
-  catColor = color(255);
-  }
 
 }
 function updateLasers() {
@@ -120,7 +108,7 @@ function updateLasers() {
 
     push();
     stroke(132, 112, 255);
-    //point(lasers[i].x,lasers[i].y);
+    point(lasers[i].x,lasers[i].y);
 
     line(lasers[i].x, lasers[i].y, lasers[i].x + laserVel[i].x * 4, lasers[i].y + laserVel[i].y * 4)
 
@@ -128,19 +116,15 @@ function updateLasers() {
   }
 }
 
-function keyPressed() {                  
-  //console.log (keyCode); 
+function keyPressed() {                   
   if (keyCode == 32) {  
-    //laserSound.play();
     lasers.push(createVector(cat.x, cat.y));
     laserVel.push(p5.Vector.fromAngle(radians(heading)).mult(7));
 
 
   }
 }
-function updatePlayer() {
-  boostColor = color(0)
-  //move and rotate player 
+function updatePlayer() { 
     
     if( keyIsDown(LEFT_ARROW)){
     heading -= 6;
@@ -151,7 +135,6 @@ function updatePlayer() {
     if(keyIsDown(UP_ARROW)){
     force=p5.Vector.fromAngle(radians(heading));
     catVel.add(force.mult(0.2));
-      boostColor = color(0, 255, 0);
     }
   
   //contain player
@@ -170,31 +153,21 @@ function updatePlayer() {
 
 
   
-  //update player location
+  //updates player location
 	catVel.mult(0.978);
   cat.add(catVel);
-  //draw the player
+  //draws the player and lets it move
   push();
-  //image(catImg,width/2,height/2);
   translate( cat.x , cat.y);
   rotate(radians(heading));
-  //flame stuff
-  
-  fill(boostColor)
-  image(catImg,width/2,height/2)
-  //image(catImg,-size+8,size*5,size*5,size/2);
-  //triangle(catImg,-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
-  //health
-  
-
-  fill(catColor);
-  image(catImg,width/2,height/2)
-  //image(catImg,size+2,size*.2,-size*5,size/2,size*2,size*.1);
-  //triangle(catImg,-size+1, -size+1, size+1, 0, -size+1, size+1);
+ // draws the cat
+  imageMode(CENTER);
+  image(catImg,size/2,size/2)
+  //draws the cat again
+  imageMode(CENTER);
+  image(catImg, size/2,size/2)
+  //makes the score go in the corner
   pop();
-  fill(255);
-  //text(Health,cat.x-10,cat.y+25)
- 
   fill(255);
   text(Score,25,25);
 
