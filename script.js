@@ -26,7 +26,7 @@ let dogImg;
 
 function preload() {
  catImg = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
- dogImg = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fdog.png?v=1628061099317")
+ dogImg = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2FUntitled.png?v=1628061819866")
 }
 
 
@@ -43,7 +43,7 @@ function setup() {
   Health = 200;
   dog = [];
   dogVel = [];
-  dogSize = 25;
+  dogSize = 500;
   
   
   
@@ -93,7 +93,7 @@ for(var i = 0;i < dog.length;i++){
      }
   
   fill(132,112,255,45)
-  noStroke();
+  stroke(225);
   image(dogImg,dog[i].x,dog[i].y,dogSize);
   pop();
 }
@@ -175,20 +175,20 @@ function updatePlayer() {
   cat.add(catVel);
   //draw the player
   push();
-  image(catImg,width/2,height/2);
+  //image(catImg,width/2,height/2);
   translate( cat.x , cat.y);
   rotate(radians(heading));
   //flame stuff
   
   fill(boostColor)
-  image(catImg,width/2,height/2);
-  //triangle(-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
+  //image(catImg,width/2,height/2);
+  triangle(-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
   //health
   
 
   fill(catColor);
-  image(catImg,width/2,height/2);
-  //triangle(-size+1, -size+1, size+1, 0, -size+1, size+1);
+  //image(catImg,width/2,height/2);
+  triangle(-size+1, -size+1, size+1, 0, -size+1, size+1);
   pop();
   fill(255);
   text(Health,cat.x-10,cat.y+25)
