@@ -25,7 +25,7 @@ let dogImg;
 
 
 function preload() {
- catImg = loadImage("https://cdn.glitch.com/d125e789-8ed6-42c4-8d94-84907c5535a6%2Fcat%20head.png?v=1627945997503")
+ catImg = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fcat%20head%20(1).png?v=1628115693478")
  dogImg = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2FUntitled.png?v=1628061819866")
 }
 
@@ -35,7 +35,7 @@ function setup() {
   cat=createVector(width/2,height/2)
   catVel=createVector(0,0);
   force=createVector(0,0);
-  size = 20;
+  size = 25;
   heading = 0;
   boostColor = color(0, 255, 0);
   catColor = color(255);
@@ -181,13 +181,15 @@ function updatePlayer() {
   //flame stuff
   
   fill(boostColor)
-  image(catImg,size+2,size*0.7,-size*3.5,size/7,size*.7,size*.7);
+  image(catImg,width/2,height/2)
+  //image(catImg,-size+8,size*5,size*5,size/2);
   //triangle(catImg,-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
   //health
   
 
   fill(catColor);
-  image(catImg,size+2,size*0.7,-size*3.5,size/7,size*.7,size*7);
+  image(catImg,width/2,height/2)
+  //image(catImg,size+2,size*.2,-size*5,size/2,size*2,size*.1);
   //triangle(catImg,-size+1, -size+1, size+1, 0, -size+1, size+1);
   pop();
   fill(255);
