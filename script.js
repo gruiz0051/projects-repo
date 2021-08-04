@@ -57,7 +57,7 @@ function draw() {
   updatePlayer();
   updateBubbles();
   updateLasers();
-  image(catImg,width/2,height/2);
+  
 
 }
 
@@ -174,17 +174,20 @@ function updatePlayer() {
   cat.add(catVel);
   //draw the player
   push();
-  translate(catImg.x , catImg.y);
+  image(catImg,width/2,height/2);
+  translate(cat.x , cat.y);
   rotate(radians(heading));
   //flame stuff
   
   fill(boostColor)
-  triangle(-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
+  image(catImg,width/2,height/2);
+  //triangle(-size+2,size*.7,-size*3.5,size/7,size*-.7,-size*.7);
   //health
   
 
   fill(catColor);
-  triangle(-size+1, -size+1, size+1, 0, -size+1, size+1);
+  image(catImg,width/2,height/2);
+  //triangle(-size+1, -size+1, size+1, 0, -size+1, size+1);
   pop();
   fill(255);
   text(Health,cat.x-10,cat.y+25)
