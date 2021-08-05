@@ -19,6 +19,7 @@ let touch;
 let Score;
 let catImg;
 let dogImg;
+let dogImgOne;
 
 function preload() {
   catImg = loadImage(
@@ -26,6 +27,8 @@ function preload() {
   );
   dogImg = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-chihuahua.png?v=1628119285299")
+
+dogImgOne = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-french-bulldog.png?v=1628202303100")
 }
 
 function setup() {
@@ -38,7 +41,7 @@ function setup() {
   Score = 0;
   dog = [];
   dogVel = [];
-  dogSize = 30;
+  dogSize = 35;
 
   for (var i = 0; i < 5; i++) {
     dog.push(createVector(random(0, width), random(0, height)));
@@ -49,11 +52,11 @@ function draw() {
   background(0);
 
   updatePlayer();
-  updateBubbles();
+  updateDogs();
   updateLasers();
 }
 
-function updateBubbles() {
+function updateDogs() {
   touch = false;
   for (var i = 0; i < dog.length; i++) {
     push();
