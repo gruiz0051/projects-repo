@@ -23,8 +23,11 @@ let Score;
 let catImg;
 let dogImg = [];
 let r;
+let itemsImg;
 
 function preload() {
+  itemsImg = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-paw.png?v=1628204980130");
+  
   catImg = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-cat.png?v=1628119192338"
   );
@@ -57,18 +60,27 @@ function setup() {
   dogVel = [];
   dogSize = 35;
   r = floor(random(0,dogImg.length));
+  items =[];
+  itemsVel=[];
+  itemsSize = 25;
 
   for (var i = 0; i < 5; i++) {
     dog.push(createVector(random(0, width), random(0, height)));
     dogVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
   }
+ for (var j = 0; j <3;j++){
+   items.push(createVector(random(0,width),random(0,height)));
+   //itemsVel.push(p5.Vector.random2D.mult(random(0.2,2)));  
+ }
 }
+
 function draw() {
   background(0);
 
   updatePlayer();
   updateDogs();
   updateLasers();
+  updateItems();
 }
 
 function updateDogs() {
@@ -102,37 +114,31 @@ function updateDogs() {
     pop();
   }
 }
-/* function updateItems() {
+ function updateItems() {
   touch = false;
-  for (var i = 0; i < items.length; i++) {
+  for (var j = 0; j < items.length; j++) {
     push();
 
-    //dog to cat collisions
-    if (dist(dog[i].x, dog[i].y, cat.x, cat.y) < dogSize / 2) {
-      touch = true;
-      console.log(touch);
+    items[j].add(itemsVel[j]);
+
+    if (items[j].x > width + itemsSize / 2) {
+      items[j].x = 0;
+    }
+    if (items[j].x < -itemsSize / 2) {
+      items[j].x = 400;
+    }
+    if (items[j].y > height + itemsSize / 2) {
+      items[j].y = 0;
+    }
+    if (items[j].y < -itemsSize / 2) {
+      items[j].y = 400;
     }
 
-    dog[i].add(dogVel[i]);
-
-    if (dog[i].x > width + dogSize / 2) {
-      dog[i].x = 0;
-    }
-    if (dog[i].x < -dogSize / 2) {
-      dog[i].x = 400;
-    }
-    if (dog[i].y > height + dogSize / 2) {
-      dog[i].y = 0;
-    }
-    if (dog[i].y < -dogSize / 2) {
-      dog[i].y = 400;
-    }
-
-    image(dogImg[r], dog[i].x, dog[i].y, dogSize);
-    //image (catImg,dog[i].x,dog[i].y)
+    image(itemsImg, items[j].x, items[j].y, itemsSize);
+    
     pop();
   }
-} */
+} 
 function updateLasers() {
   for (var i = 0; i < lasers.length; i++) {
     //checks collisions
