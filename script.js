@@ -18,17 +18,16 @@ let force;
 let touch;
 let Score;
 let catImg;
-let dogImg;
-let dogImgOne;
+let dogImg= [];
+
 
 function preload() {
   catImg = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-cat.png?v=1628119192338"
   );
-  dogImg = loadImage(
-    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-chihuahua.png?v=1628119285299")
-
-dogImgOne = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-french-bulldog.png?v=1628202303100")
+  dogImg[0] = loadImage(
+    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-chihuahua.png?v=1628119285299");
+  dogImg[1] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-french-bulldog.png?v=1628202303100");
 }
 
 function setup() {
@@ -82,7 +81,7 @@ function updateDogs() {
       dog[i].y = 400;
     }
 
-    image(dogImg, dog[i].x, dog[i].y, dogSize);
+    image(dogImg[1], dog[i].x, dog[i].y, dogSize);
     pop();
   }
 }
