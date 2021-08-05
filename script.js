@@ -70,7 +70,7 @@ function setup() {
   }
  for (var j = 0; j <3;j++){
    items.push(createVector(random(0,width),random(0,height)));
-   //itemsVel.push(p5.Vector.random2D.mult(random(0.2,2)));  
+   itemsVel.push(p5.Vector.random2D().mult(random(0.2,2)));  
  }
 }
 
@@ -148,7 +148,14 @@ function updateLasers() {
         dogVel[z] = p5.Vector.random2D().mult(random(0.25, 2.25));
         Score++;
       }
+      for ( var k = 0; j < items.length;j++){
+          if (dist(lasers[j].x, lasers[j].y, items[k].x, items[k].y) < itemsSize / 2) {
+        items[k] = createVector(random(0, width), random(0, height));
+        itemsVel[k] = p5.Vector.random2D().mult(random(0.2, 2));
+        Score++;
+      }
     }
+    laser[j].add(laserVel[i]);
     lasers[i].add(laserVel[i]);
 
     push();
@@ -160,6 +167,12 @@ function updateLasers() {
       lasers[i].y,
       lasers[i].x + laserVel[i].x * 4,
       lasers[i].y + laserVel[i].y * 4
+    );
+      line(
+      lasers[j].x,
+      lasers[j].y,
+      lasers[j].x + laserVel[j].x * 4,
+      lasers[j].y + laserVel[j].y * 4
     );
 
     pop();
@@ -217,4 +230,5 @@ function updatePlayer() {
   pop();
   fill(255);
   text(Score, 25, 25);
+}
 }
