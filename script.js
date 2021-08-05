@@ -8,6 +8,9 @@
 let dog;
 let dogVel;
 let dogSize;
+let items;
+let itemsVel;
+let itemsSize;
 let lasers = [];
 let laserVel = [];
 let cat;
@@ -95,10 +98,41 @@ function updateDogs() {
     }
 
     image(dogImg[r], dog[i].x, dog[i].y, dogSize);
-    image (catImg,dog[i].x,dog[i].y)
+    //image (catImg,dog[i].x,dog[i].y)
     pop();
   }
 }
+/* function updateItems() {
+  touch = false;
+  for (var i = 0; i < items.length; i++) {
+    push();
+
+    //dog to cat collisions
+    if (dist(dog[i].x, dog[i].y, cat.x, cat.y) < dogSize / 2) {
+      touch = true;
+      console.log(touch);
+    }
+
+    dog[i].add(dogVel[i]);
+
+    if (dog[i].x > width + dogSize / 2) {
+      dog[i].x = 0;
+    }
+    if (dog[i].x < -dogSize / 2) {
+      dog[i].x = 400;
+    }
+    if (dog[i].y > height + dogSize / 2) {
+      dog[i].y = 0;
+    }
+    if (dog[i].y < -dogSize / 2) {
+      dog[i].y = 400;
+    }
+
+    image(dogImg[r], dog[i].x, dog[i].y, dogSize);
+    //image (catImg,dog[i].x,dog[i].y)
+    pop();
+  }
+} */
 function updateLasers() {
   for (var i = 0; i < lasers.length; i++) {
     //checks collisions
@@ -113,7 +147,7 @@ function updateLasers() {
 
     push();
     stroke(132, 112, 255);
-    //point(lasers[i].x,lasers[i].y);
+   
 
     line(
       lasers[i].x,
@@ -128,8 +162,9 @@ function updateLasers() {
 
 function keyPressed() {
   if (keyCode == 32) {
+    //laser velocity + direction
     lasers.push(createVector(cat.x, cat.y));
-    laserVel.push(p5.Vector.fromAngle(radians(heading)).mult(7));
+    laserVel.push(p5.Vector.fromAngle(radians(heading)).mult(13));
   }
 }
 function updatePlayer() {
@@ -140,11 +175,12 @@ function updatePlayer() {
     heading += 6;
   }
   if (keyIsDown(UP_ARROW)) {
+    //moves the cat
     force = p5.Vector.fromAngle(radians(heading));
     catVel.add(force.mult(0.2));
   }
 
-  //contain player
+  //makes the cat stay inside the screen
   if (cat.x > 400) {
     cat.x = 0;
   }
