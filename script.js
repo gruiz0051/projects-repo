@@ -8,9 +8,9 @@
 let dog;
 let dogVel;
 let dogSize;
-let items;
-let itemsVel;
-let itemsSize;
+let paw;
+let pawVel;
+let pawSize;
 let lasers = [];
 let laserVel = [];
 let cat;
@@ -23,11 +23,13 @@ let Score;
 let catImg;
 let dogImg = [];
 let r;
-let itemsImg;
+let pawImg;
 
 function preload() {
-  itemsImg = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-paw.png?v=1628204980130");
-  
+  pawImg = loadImage(
+    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-paw.png?v=1628204980130"
+  );
+
   catImg = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-cat.png?v=1628119192338"
   );
@@ -59,19 +61,19 @@ function setup() {
   dog = [];
   dogVel = [];
   dogSize = 35;
-  r = floor(random(0,dogImg.length));
-  items =[];
-  itemsVel=[];
-  itemsSize = 25;
+  r = floor(random(0, dogImg.length));
+  paw = [];
+  pawVel = [];
+  pawSize = 25;
 
   for (var i = 0; i < 5; i++) {
     dog.push(createVector(random(0, width), random(0, height)));
     dogVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
   }
- for (var j = 0; j <3;j++){
-   items.push(createVector(random(0,width),random(0,height)));
-   itemsVel.push(p5.Vector.random2D().mult(random(0.2,2)));  
- }
+  for (var j = 0; j < 3; j++) {
+    paw.push(createVector(random(0, width), random(0, height)));
+    pawVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
+  }
 }
 
 function draw() {
@@ -114,31 +116,31 @@ function updateDogs() {
     pop();
   }
 }
- function updateItems() {
+function updateItems() {
   touch = false;
-  for (var j = 0; j < items.length; j++) {
+  for (var j = 0; j < paw.length; j++) {
     push();
 
-    items[j].add(itemsVel[j]);
+    paw[j].add(pawVel[j]);
 
-    if (items[j].x > width + itemsSize / 2) {
-      items[j].x = 0;
+    if (paw[j].x > width + pawSize / 2) {
+      paw[j].x = 0;
     }
-    if (items[j].x < -itemsSize / 2) {
-      items[j].x = 400;
+    if (paw[j].x < -pawSize / 2) {
+      paw[j].x = 400;
     }
-    if (items[j].y > height + itemsSize / 2) {
-      items[j].y = 0;
+    if (paw[j].y > height + pawSize / 2) {
+      paw[j].y = 0;
     }
-    if (items[j].y < -itemsSize / 2) {
+    if ([j].y < -itemsSize / 2) {
       items[j].y = 400;
     }
 
     image(itemsImg, items[j].x, items[j].y, itemsSize);
-    
+
     pop();
   }
-} 
+}
 function updateLasers() {
   for (var i = 0; i < lasers.length; i++) {
     //checks collisions
@@ -148,87 +150,75 @@ function updateLasers() {
         dogVel[z] = p5.Vector.random2D().mult(random(0.25, 2.25));
         Score++;
       }
-      for ( var k = 0; j < items.length;j++){
-          if (dist(lasers[j].x, lasers[j].y, items[k].x, items[k].y) < itemsSize / 2) {
-        items[k] = createVector(random(0, width), random(0, height));
-        itemsVel[k] = p5.Vector.random2D().mult(random(0.2, 2));
-        Score++;
-      }
     }
-    laser[j].add(laserVel[i]);
-    lasers[i].add(laserVel[i]);
+      lasers[i].add(laserVel[i]);
 
-    push();
-    stroke(132, 112, 255);
-   
+      push();
+      stroke(132, 112, 255);
 
-    line(
-      lasers[i].x,
-      lasers[i].y,
-      lasers[i].x + laserVel[i].x * 4,
-      lasers[i].y + laserVel[i].y * 4
-    );
       line(
-      lasers[j].x,
-      lasers[j].y,
-      lasers[j].x + laserVel[j].x * 4,
-      lasers[j].y + laserVel[j].y * 4
-    );
+        lasers[i].x,
+        lasers[i].y,
+        lasers[i].x + laserVel[i].x * 4,
+        lasers[i].y + laserVel[i].y * 4
+      );
+      
 
+      pop();
+    }
+  }
+  //cat code
+
+  function keyPressed() {
+    if (keyCode == 32) {
+      //laser velocity + direction
+      lasers.push(createVector(cat.x, cat.y));
+      laserVel.push(p5.Vector.fromAngle(radians(heading)).mult(13));
+    }
+  }
+  function updatePlayer() {
+    if (keyIsDown(LEFT_ARROW)) {
+      heading -= 6;
+    }
+    if (keyIsDown(RIGHT_ARROW)) {
+      heading += 6;
+    }
+    if (keyIsDown(UP_ARROW)) {
+      //moves the cat
+      force = p5.Vector.fromAngle(radians(heading));
+      catVel.add(force.mult(0.2));
+    }
+
+    //makes the cat stay inside the screen
+    if (cat.x > 400) {
+      cat.x = 0;
+    }
+    if (cat.x < 0) {
+      cat.x = 400;
+    }
+    if (cat.y > 400) {
+      cat.y = 0;
+    }
+    if (cat.y < 0) {
+      cat.y = 400;
+    }
+
+    //updates player location
+    catVel.mult(0.978);
+    cat.add(catVel);
+    //draws the player and lets it move
+    push();
+    translate(cat.x, cat.y);
+    rotate(radians(heading));
+    // draws the cat
+    imageMode(CENTER);
+    image(catImg, size / 10, size / 10);
+    //draws the cat again
+    imageMode(CENTER);
+    image(catImg, size / 10, size / 10);
+    //makes the score go in the corner
     pop();
-  }
-}
-
-function keyPressed() {
-  if (keyCode == 32) {
-    //laser velocity + direction
-    lasers.push(createVector(cat.x, cat.y));
-    laserVel.push(p5.Vector.fromAngle(radians(heading)).mult(13));
-  }
-}
-function updatePlayer() {
-  if (keyIsDown(LEFT_ARROW)) {
-    heading -= 6;
-  }
-  if (keyIsDown(RIGHT_ARROW)) {
-    heading += 6;
-  }
-  if (keyIsDown(UP_ARROW)) {
-    //moves the cat
-    force = p5.Vector.fromAngle(radians(heading));
-    catVel.add(force.mult(0.2));
+    fill(255);
+    text(Score, 25, 25);
   }
 
-  //makes the cat stay inside the screen
-  if (cat.x > 400) {
-    cat.x = 0;
-  }
-  if (cat.x < 0) {
-    cat.x = 400;
-  }
-  if (cat.y > 400) {
-    cat.y = 0;
-  }
-  if (cat.y < 0) {
-    cat.y = 400;
-  }
-
-  //updates player location
-  catVel.mult(0.978);
-  cat.add(catVel);
-  //draws the player and lets it move
-  push();
-  translate(cat.x, cat.y);
-  rotate(radians(heading));
-  // draws the cat
-  imageMode(CENTER);
-  image(catImg, size / 10, size / 10);
-  //draws the cat again
-  imageMode(CENTER);
-  image(catImg, size / 10, size / 10);
-  //makes the score go in the corner
-  pop();
-  fill(255);
-  text(Score, 25, 25);
-}
-}
