@@ -3,7 +3,7 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,translate,rotate,p5,dist,distance,size,radians,catColor,force, heading,boostColor,Score,catVel,cat,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
+          keyCode,floor,translate,rotate,p5,dist,distance,size,radians,catColor,force, heading,boostColor,Score,catVel,cat,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
 let dog;
 let dogVel;
@@ -18,16 +18,28 @@ let force;
 let touch;
 let Score;
 let catImg;
-let dogImg= [];
-
+let dogImg = [];
+let r;
 
 function preload() {
   catImg = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-cat.png?v=1628119192338"
   );
   dogImg[0] = loadImage(
-    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-chihuahua.png?v=1628119285299");
-  dogImg[1] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-french-bulldog.png?v=1628202303100");
+    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-chihuahua.png?v=1628119285299"
+  );
+  dogImg[1] = loadImage(
+    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-french-bulldog.png?v=1628202303100"
+  );
+  dogImg[2] = loadImage(
+    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-rottweiler.png?v=1628202853963"
+  );
+  dogImg[3] = loadImage(
+    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-poodle%20(1).png?v=1628203327100"
+  );
+  dogImg[4] = loadImage(
+    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-great-dane.png?v=1628203417931"
+  );
 }
 
 function setup() {
@@ -41,6 +53,7 @@ function setup() {
   dog = [];
   dogVel = [];
   dogSize = 35;
+  r = floor(random(0,dogImg.length));
 
   for (var i = 0; i < 5; i++) {
     dog.push(createVector(random(0, width), random(0, height)));
@@ -81,7 +94,8 @@ function updateDogs() {
       dog[i].y = 400;
     }
 
-    image(dogImg[1], dog[i].x, dog[i].y, dogSize);
+    image(dogImg[r], dog[i].x, dog[i].y, dogSize);
+    image (catImg,dog[i].x,dog[i].y)
     pop();
   }
 }
