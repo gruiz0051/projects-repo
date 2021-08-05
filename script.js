@@ -3,11 +3,14 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,floor,translate,rotate,p5,dist,distance,size,radians,catColor,force, heading,boostColor,Score,catVel,cat,dog,dogSize,dogVelocity,updatePlayer,updateDog,updateLasers,push,pop,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
+          keyCode,floor,translate,rotate,p5,dist,distance,size,radians,catColor,force, heading,boostColor,Score,catVel,cat,dog,dogSize,dogVelocity,updatePlayer,updateItems,updateDog,updateLasers,push,pop,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
 let dog;
 let dogVel;
 let dogSize;
+let bulldog;
+let bulldogVel;
+let bulldogSize;
 let paw;
 let pawVel;
 let pawSize;
@@ -21,9 +24,9 @@ let force;
 let touch;
 let Score;
 let catImg;
-let dogImg = [];
-let r;
+let dogImg ;
 let pawImg;
+let bulldogImg
 
 function preload() {
   pawImg = loadImage(
@@ -33,21 +36,10 @@ function preload() {
   catImg = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-cat.png?v=1628119192338"
   );
-  dogImg[0] = loadImage(
+  dogImg= loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-chihuahua.png?v=1628119285299"
   );
-  dogImg[1] = loadImage(
-    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-french-bulldog.png?v=1628202303100"
-  );
-  dogImg[2] = loadImage(
-    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-rottweiler.png?v=1628202853963"
-  );
-  dogImg[3] = loadImage(
-    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-poodle%20(1).png?v=1628203327100"
-  );
-  dogImg[4] = loadImage(
-    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-great-dane.png?v=1628203417931"
-  );
+  bulldogImg = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-french-bulldog.png?v=1628202303100");
 }
 
 function setup() {
@@ -61,12 +53,12 @@ function setup() {
   dog = [];
   dogVel = [];
   dogSize = 35;
-  r = floor(random(0, dogImg.length));
+  //r = floor(random(0, dogImg.length));
   paw = [];
   pawVel = [];
   pawSize = 25;
 
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < 3; i++) {
     dog.push(createVector(random(0, width), random(0, height)));
     dogVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
   }
@@ -74,6 +66,10 @@ function setup() {
     paw.push(createVector(random(0, width), random(0, height)));
     pawVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
   }
+  /*for (var b = 0; b < 3; b++) {
+    bulldog.push(createVector(random(0, width), random(0, height)));
+    bulldogVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
+  }*/
 }
 
 function draw() {
@@ -111,10 +107,37 @@ function updateDogs() {
       dog[i].y = 400;
     }
 
-    image(dogImg[r], dog[i].x, dog[i].y, dogSize);
+    image(dogImg, dog[i].x, dog[i].y, dogSize);
     //image (catImg,dog[i].x,dog[i].y)
     pop();
   }
+  for (var b = 0; b < bulldog.length; b++) {
+    push();
+
+    //dog to cat collisions
+    if (dist(bulldog[b].x, bulldog[b].y, cat.x, cat.y) < bulldogSize / 2) {
+      touch = true;
+      console.log(touch);
+    }
+
+    bulldog[b].add(bulldogVel[b]);
+
+    if (bulldog[b].x > width + bulldogSize / 2) {
+      bullodg[b].x = 0;
+    }
+    if (bulldog[b].x < -bulldogSize / 2) {
+      dulldog[b].x = 400;
+    }
+    if (bulldog[b].y > height + bulldogSize / 2) {
+      bulldog[b].y = 0;
+    }
+    if (bulldog[b].y < -bulldogSize / 2) {
+      bulldog[b].y = 400;
+    }
+
+    image(bulldogImg, bulldog[b].x, bulldog[b].y, bulldogSize);
+    
+    pop();
 }
 function updateItems() {
   touch = false;
@@ -132,11 +155,11 @@ function updateItems() {
     if (paw[j].y > height + pawSize / 2) {
       paw[j].y = 0;
     }
-    if ([j].y < -itemsSize / 2) {
-      items[j].y = 400;
+    if (paw[j].y < -pawSize / 2) {
+      paw[j].y = 400;
     }
 
-    image(itemsImg, items[j].x, items[j].y, itemsSize);
+    image(pawImg, paw[j].x, paw[j].y, pawSize);
 
     pop();
   }
@@ -222,3 +245,4 @@ function updateLasers() {
     text(Score, 25, 25);
   }
 
+}
