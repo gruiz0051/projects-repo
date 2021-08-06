@@ -71,7 +71,7 @@ function setup() {
   itemsSize = 25;
 
   
-
+// declares the vector(direction) they are going 
   for (var i = 0; i < 5; i++) {
     dog.push(createVector(random(0, width), random(0, height)));
     dogVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
@@ -104,6 +104,8 @@ function setup() {
       }
 
       dog[i].add(dogVel[i]);
+      
+      //restricts the characters to the canvas size
 
       if (dog[i].x > width + dogSize / 2) {
         dog[i].x = 0;
@@ -150,7 +152,7 @@ function setup() {
   
   function updateLasers() {
     for (var i = 0; i < lasers.length; i++) {
-      //checks collisions
+      //checks collisions from laser to dog
       for (var z = 0; z < dog.length; z++) {
         if (dist(lasers[i].x, lasers[i].y, dog[z].x, dog[z].y) < dogSize / 2) {
           dog[z] = createVector(random(0, width), random(0, height));
@@ -158,7 +160,7 @@ function setup() {
           Score++;
         }
       }
-      //checks collisions
+  
       
       lasers[i].add(laserVel[i]);
 lasers[i].add(laserVel[i]);
@@ -176,7 +178,9 @@ lasers[i].add(laserVel[i]);
 
       pop();
     }
+    
   }
+// I just copied and pasted the updated laser 
 /*function updateLasers() {
     for (var i = 0; i < lasers.length; i++) {
       //checks collisions
