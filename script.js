@@ -186,7 +186,7 @@ function setup() {
   //cat code
 
   function keyPressed() {
-    if (keyCode === CONTROL) {
+    if (keyCode == 32) {
       //laser velocity + direction
       lasers.push(createVector(cat.x, cat.y));
       laserVel.push(p5.Vector.fromAngle(radians(heading)).mult(13));
