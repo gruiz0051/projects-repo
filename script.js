@@ -35,6 +35,13 @@ function preload() {
   dogImg[0] = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-chihuahua.png?v=1628119285299"
   );
+  dogImg[1] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-french-bulldog.png?v=1628202303100");
+  
+  
+  dogImg[2]= loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-rottweiler.png?v=1628202853963");
+
+  dogImg[3]= loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-poodle%20(1).png?v=1628203327100");
+   dogImg[4]
 }
 
 function setup() {
@@ -55,7 +62,7 @@ function setup() {
 
   
 
-  for (var i = 0; i < 3; i++) {
+  for (var i = 0; i < 4; i++) {
     dog.push(createVector(random(0, width), random(0, height)));
     dogVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
   }
@@ -101,7 +108,7 @@ function setup() {
         dog[i].y = 400;
       }
 
-      image(dogImg[0], dog[i].x, dog[i].y, dogSize);
+      image(dogImg[i], dog[i].x, dog[i].y, dogSize);
       pop();
     }
   }
