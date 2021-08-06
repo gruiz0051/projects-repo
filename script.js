@@ -3,7 +3,10 @@
 /* global createCanvas, colorMode, HSB, width, height, random, background, fill, color, random,
           rect, ellipse, stroke, image, loadImage, collideCircleCircle, collideRectCircle, text, 
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
-          keyCode,floor,updateBullDog,translate,rotate,p5,dist,distance,size,radians,catColor,force, heading,boostColor,Score,catVel,cat,dog,dogSize,dogVelocity,updatePlayer,updateItems,updateDog,updateLasers,push,pop,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
+          keyCode,floor,updateBullDog,translate,rotate,p5,dist,distance,size,radians,catColor,force,
+          heading,boostColor,Score,catVel,cat,dog,dogSize,dogVelocity,updatePlayer,updateItems,updateDog,
+          updateLasers,push,pop,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, 
+          LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
 let dog;
 let dogVel;
@@ -55,7 +58,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(600, 600);
   cat = createVector(width / 2, height / 2);
   catVel = createVector(0, 0);
   force = createVector(0, 0);
@@ -111,13 +114,13 @@ function setup() {
         dog[i].x = 0;
       }
       if (dog[i].x < -dogSize / 2) {
-        dog[i].x = 400;
+        dog[i].x = 600;
       }
       if (dog[i].y > height + dogSize / 2) {
         dog[i].y = 0;
       }
       if (dog[i].y < -dogSize / 2) {
-        dog[i].y = 400;
+        dog[i].y = 600;
       }
 
       image(dogImg[i], dog[i].x, dog[i].y, dogSize);
@@ -135,13 +138,13 @@ function setup() {
         items[j].x = 0;
       }
       if (items[j].x < -itemsSize / 2) {
-        items[j].x = 400;
+        items[j].x = 600;
       }
       if (items[j].y > height + itemsSize / 2) {
         items[j].y = 0;
       }
       if (items[j].y < -itemsSize / 2) {
-        items[j].y = 400;
+        items[j].y = 600;
       }
 
       image(itemsImg[j], items[j].x, items[j].y, itemsSize);
@@ -234,17 +237,17 @@ lasers[i].add(laserVel[i]);
     }
 
     //makes the cat stay inside the screen
-    if (cat.x > 400) {
+    if (cat.x > 600) {
       cat.x = 0;
     }
     if (cat.x < 0) {
-      cat.x = 400;
+      cat.x = 600;
     }
-    if (cat.y > 400) {
+    if (cat.y > 600) {
       cat.y = 0;
     }
     if (cat.y < 0) {
-      cat.y = 400;
+      cat.y = 600;
     }
 
     //updates player location
