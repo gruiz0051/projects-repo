@@ -160,7 +160,6 @@ function setup() {
         if (dist(lasers[i].x, lasers[i].y, dog[z].x, dog[z].y) < dogSize / 2) {
           dog[z] = createVector(random(0, width), random(0, height));
           dogVel[z] = p5.Vector.random2D().mult(random(0.25, 2.25));
-          Score++;
         }
       }
   
@@ -183,36 +182,6 @@ lasers[i].add(laserVel[i]);
     }
     
   }
-// I just copied and pasted the updated laser 
-/*function updateLasers() {
-    for (var i = 0; i < lasers.length; i++) {
-      //checks collisions
-      for (var z = 0; z < dog.length; z++) {
-        if (dist(lasers[i].x, lasers[i].y, dog[z].x, dog[z].y) < dogSize / 2) {
-          dog[z] = createVector(random(0, width), random(0, height));
-          dogVel[z] = p5.Vector.random2D().mult(random(0.25, 2.25));
-          Score++;
-        }
-      }
-      //checks collisions
-      
-      lasers[i].add(laserVel[i]);
-lasers[i].add(laserVel[i]);
-      push();
-      stroke(132, 112, 255);
-
-      line(
-        lasers[i].x,
-        lasers[i].y,
-        lasers[i].x + laserVel[i].x * 4,
-        lasers[i].y + laserVel[i].y * 4
-        
-      
-      );
-
-      pop();
-    }
-  }*/
 
   //cat code
 
@@ -265,7 +234,7 @@ lasers[i].add(laserVel[i]);
     image(catImg, size / 10, size / 10);
     //makes the score go in the corner
     pop();
-    fill(255);
+    //fill(255);
     text(Score, 25, 25);
   }
 
