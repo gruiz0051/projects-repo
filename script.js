@@ -5,7 +5,7 @@
           mouseX, mouseY, strokeWeight, line, mouseIsPressed, windowWidth, windowHeight, noStroke, 
           keyCode,floor,updateBullDog,translate,rotate,p5,dist,distance,size,radians,catColor,force,
           heading,boostColor,Score,catVel,cat,dog,dogSize,dogVelocity,updatePlayer,updateItems,updateDog,
-          updateLasers,push,pop,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, 
+          updateLasers,CONTROL,push,pop,CENTER,createVector,keyIsDown,imageMode,circle,frameCount,key, UP_ARROW, 
           LEFT_ARROW, RIGHT_ARROW, DOWN_ARROW, textSize *
 */
 let dog;
@@ -165,7 +165,7 @@ function setup() {
   
       
       lasers[i].add(laserVel[i]);
-lasers[i].add(laserVel[i]);
+ 
       push();
       stroke(132, 112, 255);
 
@@ -186,7 +186,7 @@ lasers[i].add(laserVel[i]);
   //cat code
 
   function keyPressed() {
-    if (keyCode == 32) {
+    if (keyCode === CONTROL) {
       //laser velocity + direction
       lasers.push(createVector(cat.x, cat.y));
       laserVel.push(p5.Vector.fromAngle(radians(heading)).mult(13));
