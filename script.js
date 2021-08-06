@@ -235,6 +235,6 @@ function setup() {
     //makes the score go in the corner
     pop();
     //fill(255);
-    text(Score, 25, 25);
+   
   }
 
