@@ -22,7 +22,6 @@ let heading;
 let catVel;
 let force;
 let touch;
-let Score;
 let catImg;
 let dogImg=[];
 let itemsImg=[];
