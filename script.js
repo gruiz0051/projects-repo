@@ -21,7 +21,7 @@ let force;
 let touch;
 let Score;
 let catImg;
-let dogImg;
+let dogImg=[];
 let pawImg;
 
 function preload() {
@@ -32,7 +32,7 @@ function preload() {
   catImg = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-cat.png?v=1628119192338"
   );
-  dogImg = loadImage(
+  dogImg[0] = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-chihuahua.png?v=1628119285299"
   );
 }
@@ -101,7 +101,7 @@ function setup() {
         dog[i].y = 400;
       }
 
-      image(dogImg, dog[i].x, dog[i].y, dogSize);
+      image(dogImg[0], dog[i].x, dog[i].y, dogSize);
       pop();
     }
   }
@@ -111,7 +111,7 @@ function setup() {
       push();
 
       paw[j].add(pawVel[j]);
-
+// makes items stay inside 
       if (paw[j].x > width + pawSize / 2) {
         paw[j].x = 0;
       }
