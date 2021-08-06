@@ -8,9 +8,6 @@
 let dog;
 let dogVel;
 let dogSize;
-let bullDog;
-let bullDogVel;
-let bullDogSize;
 let paw;
 let pawVel;
 let pawSize;
@@ -26,7 +23,6 @@ let Score;
 let catImg;
 let dogImg;
 let pawImg;
-let bullDogImg;
 
 function preload() {
   pawImg = loadImage(
@@ -38,9 +34,6 @@ function preload() {
   );
   dogImg = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-chihuahua.png?v=1628119285299"
-  );
-  bullDogImg = loadImage(
-    "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-french-bulldog.png?v=1628202303100"
   );
 }
 
@@ -60,9 +53,7 @@ function setup() {
   pawVel = [];
   pawSize = 25;
 
-  bullDog = [];
-  bullDogVel = [];
-  bullDogSize = 25;
+  
 
   for (var i = 0; i < 3; i++) {
     dog.push(createVector(random(0, width), random(0, height)));
@@ -72,10 +63,8 @@ function setup() {
     paw.push(createVector(random(0, width), random(0, height)));
     pawVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
   }
-  for (var b = 0; b < 3; b++) {
-    bullDog.push(createVector(random(0, width), random(0, height)));
-    bullDogVel.push(p5.Vector.random2D().mult(random(0.2, 2)));
-  }
+}
+  
 
   function draw() {
     background(0);
@@ -84,7 +73,6 @@ function setup() {
     updateDogs();
     updateLasers();
     updateItems();
-    updateBullDog();
   }
 
   function updateDogs() {
@@ -117,39 +105,6 @@ function setup() {
       pop();
     }
   }
-
-  function updateBullDog() {
-    touch = false;
-    for (var b = 0; b < bullDog.length; b++) {
-      push();
-
-      //dog to cat collisions
-      if (dist(bullDog[b].x, bullDog[b].y, cat.x, cat.y) < bullDogSize / 2) {
-        touch = true;
-        console.log(touch);
-      }
-
-      bullDog[b].add(bullDogVel[b]);
-
-      if (bullDog[b].x > width + bullDogSize / 2) {
-        bullDog[b].x = 0;
-      }
-      if (bullDog[b].x < -bullDogSize / 2) {
-        bullDog[b].x = 400;
-      }
-      if (bullDog[b].y > height + bullDogSize / 2) {
-        bullDog[b].y = 0;
-      }
-      if (bullDog[b].y < -bullDogSize / 2) {
-        bullDog[b].y = 400;
-      }
-
-      image(bullDogImg, bullDog[b].x, bullDog[b].y, bullDogSize);
-
-      pop();
-    }
-  }
-
   function updateItems() {
     touch = false;
     for (var j = 0; j < paw.length; j++) {
@@ -175,6 +130,7 @@ function setup() {
       pop();
     }
   }
+  
   function updateLasers() {
     for (var i = 0; i < lasers.length; i++) {
       //checks collisions
@@ -254,4 +210,4 @@ function setup() {
     fill(255);
     text(Score, 25, 25);
   }
-}
+
