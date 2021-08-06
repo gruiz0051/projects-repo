@@ -8,9 +8,9 @@
 let dog;
 let dogVel;
 let dogSize;
-let paw;
-let pawVel;
-let pawSize;
+let items;
+let itemsVel;
+let itemsSize;
 let lasers = [];
 let laserVel = [];
 let cat;
@@ -22,12 +22,21 @@ let touch;
 let Score;
 let catImg;
 let dogImg=[];
-let pawImg;
+let itemsImg=[];
 
 function preload() {
-  pawImg = loadImage(
+  itemsImg[0] = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-paw.png?v=1628204980130"
   );
+  itemsImg[1] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-beef.png?v=1628206490731");
+   itemsImg[2]= loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-bells.png?v=1628206493107");
+  itemsImg[3] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-chicken.png?v=1628206497309");
+  itemsImg[4] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-feather-whip.png?v=1628206500981");
+  itemsImg [5] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-fur-ball.png?v=1628206505320");
+  itemsImg[6] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-golden-catnip.png?v=1628206511372");
+  itemsImg[7] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-golden-claw.png?v=1628206515199");
+  itemsImg [8] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-tuna.png?v=1628206520920");
+  itemsImg[9] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-yarn.png?v=1628206526209");
 
   catImg = loadImage(
     "https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-cat.png?v=1628119192338"
@@ -41,7 +50,8 @@ function preload() {
   dogImg[2]= loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-rottweiler.png?v=1628202853963");
 
   dogImg[3]= loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-poodle%20(1).png?v=1628203327100");
-   dogImg[4]
+   
+  dogImg[4] = loadImage("https://cdn.glitch.com/79734bfa-f2b6-44e5-8e37-8d5047523bc8%2Fpixel-great-dane.png?v=1628203417931");
 }
 
 function setup() {
@@ -56,19 +66,19 @@ function setup() {
   dogVel = [];
   dogSize = 35;
   //r = floor(random(0, dogImg.length));
-  paw = [];
-  pawVel = [];
-  pawSize = 25;
+  items = [];
+  itemsVel = [];
+  itemsSize = 25;
 
   
 
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < 5; i++) {
     dog.push(createVector(random(0, width), random(0, height)));
     dogVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
   }
-  for (var j = 0; j < 3; j++) {
-    paw.push(createVector(random(0, width), random(0, height)));
-    pawVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
+  for (var j = 0; j < 10; j++) {
+    items.push(createVector(random(0, width), random(0, height)));
+    itemsVel.push(p5.Vector.random2D().mult(random(0.25, 2.25)));
   }
 }
   
@@ -114,25 +124,25 @@ function setup() {
   }
   function updateItems() {
     touch = false;
-    for (var j = 0; j < paw.length; j++) {
+    for (var j = 0; j < items.length; j++) {
       push();
 
-      paw[j].add(pawVel[j]);
+      items[j].add(itemsVel[j]);
 // makes items stay inside 
-      if (paw[j].x > width + pawSize / 2) {
-        paw[j].x = 0;
+      if (items[j].x > width + itemsSize / 2) {
+        items[j].x = 0;
       }
-      if (paw[j].x < -pawSize / 2) {
-        paw[j].x = 400;
+      if (items[j].x < -itemsSize / 2) {
+        items[j].x = 400;
       }
-      if (paw[j].y > height + pawSize / 2) {
-        paw[j].y = 0;
+      if (items[j].y > height + itemsSize / 2) {
+        items[j].y = 0;
       }
-      if (paw[j].y < -pawSize / 2) {
-        paw[j].y = 400;
+      if (items[j].y < -itemsSize / 2) {
+        items[j].y = 400;
       }
 
-      image(pawImg, paw[j].x, paw[j].y, pawSize);
+      image(itemsImg[j], items[j].x, items[j].y, itemsSize);
 
       pop();
     }
@@ -148,8 +158,10 @@ function setup() {
           Score++;
         }
       }
+      //checks collisions
+      
       lasers[i].add(laserVel[i]);
-
+lasers[i].add(laserVel[i]);
       push();
       stroke(132, 112, 255);
 
@@ -158,11 +170,43 @@ function setup() {
         lasers[i].y,
         lasers[i].x + laserVel[i].x * 4,
         lasers[i].y + laserVel[i].y * 4
+        
+      
       );
 
       pop();
     }
   }
+/*function updateLasers() {
+    for (var i = 0; i < lasers.length; i++) {
+      //checks collisions
+      for (var z = 0; z < dog.length; z++) {
+        if (dist(lasers[i].x, lasers[i].y, dog[z].x, dog[z].y) < dogSize / 2) {
+          dog[z] = createVector(random(0, width), random(0, height));
+          dogVel[z] = p5.Vector.random2D().mult(random(0.25, 2.25));
+          Score++;
+        }
+      }
+      //checks collisions
+      
+      lasers[i].add(laserVel[i]);
+lasers[i].add(laserVel[i]);
+      push();
+      stroke(132, 112, 255);
+
+      line(
+        lasers[i].x,
+        lasers[i].y,
+        lasers[i].x + laserVel[i].x * 4,
+        lasers[i].y + laserVel[i].y * 4
+        
+      
+      );
+
+      pop();
+    }
+  }*/
+
   //cat code
 
   function keyPressed() {
